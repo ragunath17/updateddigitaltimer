@@ -91,6 +91,9 @@
   font-weight: bold;
   margin-left: 10px;
   color: #1e293b;
+  background: transparent;
+  outline: none;
+  border: 0px none;
 }
 
 .set-timer-card {
