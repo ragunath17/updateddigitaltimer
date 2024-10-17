@@ -43,7 +43,8 @@ class DigitalTimer extends Component {
     if (isTimerRunning) {
       clearInterval(intervalId)
     } else {
-      this.setState({intervalId: setInterval(this.timer, 1000)})
+      const newIntervalId = setInterval(this.timer, 1000)
+      this.setState({intervalId: newIntervalId})
     }
     this.setState(prevState => ({
       isTimerRunning: !prevState.isTimerRunning,
@@ -60,19 +61,21 @@ class DigitalTimer extends Component {
   }
 
   incrementTimer = () => {
-    const {isTimerRunning} = this.state
-    if (!isTimerRunning) {
-      this.setState(prevState => ({timerLimit: prevState.timerLimit + 60}))
-    }
+    this.setState(prevState => {
+      if (!prevState.isTimerRunning) {
+        return {timerLimit: prevState.timerLimit + 60}
+      }
+      return null
+    })
   }
 
   decrementTimer = () => {
-    const {isTimerRunning} = this.state
-    if (!isTimerRunning) {
-      this.setState(prevState => ({
-        timerLimit: prevState.timerLimit - 60,
-      }))
-    }
+    this.setState(prevState => {
+      if (!prevState.isTimerRunning) {
+        return {timerLimit: prevState.timerLimit - 60}
+      }
+      return null
+    })
   }
 
   render() {
